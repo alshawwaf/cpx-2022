@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Set Variables we need in the userdata logic. Note that if you're using VS Code, the End of Line Sequence should be LF
+
+sic_key='${sic_key}'
+token='${token}'
+company='${company}'
+
+#This build the config string including the smart-1 cloud authenticaton key.
+
+config_string="install_security_gw=true&install_ppak=true&gateway_cluster_member=false&install_security_managment=false&install_mgmt_primary=true&install_mgmt_secondary=false&download_info=true&hostname=$company-cp-gw&mgmt_gui_clients_radio=any&mgmt_admin_radio=gaia_admin&maas_authentication_key=$token&ftw_sic_key=$sic_key"
+
+clish -c "set static-route 10.10.2.0/24 nexthop gateway address 10.10.1.1 on"
+clish -c "save config"
+
+config_system.orig -s $config_string
+
+reboot
