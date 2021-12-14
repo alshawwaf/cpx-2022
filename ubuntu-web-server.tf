@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "ubuntu-nic" {
 
 # Create Linux VM with linux server
 resource "azurerm_linux_virtual_machine" "ubuntu-vm" {
-  depends_on=[azurerm_network_interface.ubuntu-nic]
+  depends_on=[azurerm_network_interface.ubuntu-nic, null_resource.smart-1-cloud-establish-sic]
 
   location              = azurerm_resource_group.smart1-cp-gw-rg.location
   resource_group_name   = azurerm_resource_group.smart1-cp-gw-rg.name
@@ -53,6 +53,7 @@ resource "azurerm_linux_virtual_machine" "ubuntu-vm" {
   tags = {
     environment = var.environment
   }
+
 }
 
 data "template_file" "ubuntu-cloud-init" {
