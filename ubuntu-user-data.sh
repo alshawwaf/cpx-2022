@@ -22,9 +22,9 @@ sudo docker-compose --version  >> /tmp/ubuntu-provisioning.log
 
 ping -c 1 google.com >> /tmp/ubuntu-provisioning.log
 
-
-sudo git clone git@github.com:alshawwaf/voting-app.git
-cd /voting-app
+#clone the voting app
+sudo git clone https://github.com/dockersamples/example-voting-app.git
+cd /example-voting-app
 sudo docker-compose up -d 
 
 
